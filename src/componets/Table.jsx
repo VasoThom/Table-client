@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import EditPerson from "./EditPerson.jsx";
 import InputAddPerson from "./InputAddPerson.jsx";
 import SearchbyEmail from "./SearchbyEmail.jsx";
 
 const Table = () => {
   const [search, setSearch] = useState("");
+  const [edit, setEdit] = useState(false);
+
   const handleChange = (event) => {
     console.log("searching...");
     setSearch(event.target.value);
@@ -47,9 +50,14 @@ const Table = () => {
   const deleteOne = (id) => {
     setData(data.filter((el) => el.id !== id));
   };
+
+  const updateOne = (id) => {
+    setEdit(id);
+  };
+
   return (
     <div>
-      <InputAddPerson addPerson={addPerson} />
+      <InputAddPerson addPerson={addPerson} edit={edit} setEdit={setEdit} />
       <SearchbyEmail handleChange={handleChange} />
 
       <table>
@@ -65,8 +73,15 @@ const Table = () => {
 
         {filterdata.length > 0 ? (
           <tbody key="data">
-            {filterdata.map((val) => {
-              return (
+            {filterdata.map((val) =>
+              edit === val.id ? (
+                <EditPerson
+                  key={val.id}
+                  val={val}
+                  data={data}
+                  setData={setData}
+                />
+              ) : (
                 <tr key={val.id}>
                   <td>{val.id}</td>
                   <td>{val.name}</td>
@@ -74,14 +89,14 @@ const Table = () => {
                   <td>{val.email}</td>
                   <td>{val.status}</td>
                   <td>
-                    <button>Edit</button>
+                    <button onClick={() => updateOne(val.id)}>Edit</button>
                   </td>
                   <td>
                     <button onClick={() => deleteOne(val.id)}>Remove</button>
                   </td>
                 </tr>
-              );
-            })}
+              )
+            )}
           </tbody>
         ) : (
           <tbody key="empty">
