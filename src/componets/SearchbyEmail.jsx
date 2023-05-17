@@ -1,9 +1,13 @@
 import React from "react";
 
-const SearchbyEmail = () => {
+const SearchbyEmail = ({ handleChange }) => {
   return (
     <div>
-      <input type="text" placeholder="search by Email..." />
+      <input
+        type="search"
+        onChange={handleChange}
+        placeholder="search by Email..."
+      />
     </div>
   );
 };
