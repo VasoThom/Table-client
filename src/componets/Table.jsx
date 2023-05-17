@@ -8,17 +8,18 @@ const Table = () => {
     console.log("searching...");
     setSearch(event.target.value);
   };
-  const data = [
+
+  const [data, setData] = useState([
     {
-      name: "Vaso",
+      name: "Anna",
       birthday: "10.01.2020",
-      email: "vasothom@hotmail.com",
+      email: "anna@hotmail.com",
       status: "Active",
     },
     {
-      name: "Vaso",
+      name: "Ella",
       birthday: "10.01.2020",
-      email: "vasothom@hotmail.com",
+      email: "ellarotary@hotmail.com",
       status: "Pending",
     },
     {
@@ -27,7 +28,11 @@ const Table = () => {
       email: "vasothom@hotmail.com",
       status: "Blocked",
     },
-  ];
+  ]);
+
+  const addPerson = (newPerson) => {
+    setData([...data, newPerson]);
+  };
 
   const filterdata = data.filter((el) =>
     el.email.toLowerCase().includes(search.toLowerCase())
@@ -35,7 +40,7 @@ const Table = () => {
 
   return (
     <div>
-      <InputAddPerson />
+      <InputAddPerson addPerson={addPerson} />
       <SearchbyEmail handleChange={handleChange} />
 
       <table>

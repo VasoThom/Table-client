@@ -1,19 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 
-const InputAddPerson = () => {
+const InputAddPerson = ({ addPerson }) => {
+  const initial = {
+    name: "",
+    birthday: "",
+    email: "",
+    status: "",
+  };
+  const [values, setValues] = useState(initial);
+
+  const onChange = (e) => {
+    setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addPerson(values);
+    //epanafero tn form .. .thn adeiazo
+    setValues(initial);
+  };
+
   return (
     <div>
-      <form action="">
-        <input type="text" placeholder="name" name="name" />
-        <input type="date" name="date" id="" />
-        <input type="email" placeholder="email" name="email" />
-        <select name="status" id="">
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={values.name}
+          onChange={onChange}
+          placeholder="name"
+          name="name"
+        />
+
+        <input
+          type="date"
+          value={values.birthday}
+          onChange={onChange}
+          name="birthday"
+        />
+        <input
+          type="email"
+          onChange={onChange}
+          value={values.email}
+          placeholder="email"
+          name="email"
+        />
+        <select name="status" onChange={onChange} value={values.status}>
           <option value="">Status</option>
-          <option value="active">Active</option>
-          <option value="pending">Pending</option>
-          <option value="blocked">Blocked</option>
+          <option value="Active">Active</option>
+          <option value="Pending">Pending</option>
+          <option value="Blocked">Blocked</option>
         </select>
-        <button>Add</button>
+        <button type="submit">Add</button>
       </form>
     </div>
   );
