@@ -11,18 +11,21 @@ const Table = () => {
 
   const [data, setData] = useState([
     {
+      id: 1,
       name: "Anna",
       birthday: "10.01.2020",
       email: "anna@hotmail.com",
       status: "Active",
     },
     {
+      id: 2,
       name: "Ella",
       birthday: "10.01.2020",
       email: "ellarotary@hotmail.com",
       status: "Pending",
     },
     {
+      id: 3,
       name: "Vaso",
       birthday: "16.07.1990",
       email: "vasothom@hotmail.com",
@@ -31,13 +34,19 @@ const Table = () => {
   ]);
 
   const addPerson = (newPerson) => {
-    setData([...data, newPerson]);
+    const highestId = Math.max(...data.map((person) => person.id));
+    const nextId = highestId + 1;
+    const personWithId = { ...newPerson, id: nextId };
+    setData([...data, personWithId]);
   };
 
   const filterdata = data.filter((el) =>
     el.email.toLowerCase().includes(search.toLowerCase())
   );
 
+  const deleteOne = (id) => {
+    setData(data.filter((el) => el.id !== id));
+  };
   return (
     <div>
       <InputAddPerson addPerson={addPerson} />
@@ -46,6 +55,7 @@ const Table = () => {
       <table>
         <thead>
           <tr>
+            <th>id</th>
             <th>Name</th>
             <th>Birthday</th>
             <th>Email</th>
@@ -55,9 +65,10 @@ const Table = () => {
 
         {filterdata.length > 0 ? (
           <tbody key="data">
-            {filterdata.map((val, key) => {
+            {filterdata.map((val) => {
               return (
-                <tr key={key}>
+                <tr key={val.id}>
+                  <td>{val.id}</td>
                   <td>{val.name}</td>
                   <td>{val.birthday}</td>
                   <td>{val.email}</td>
@@ -66,7 +77,7 @@ const Table = () => {
                     <button>Edit</button>
                   </td>
                   <td>
-                    <button>Remove</button>
+                    <button onClick={() => deleteOne(val.id)}>Remove</button>
                   </td>
                 </tr>
               );
