@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import EditPerson from "./EditPerson.jsx";
 import InputAddPerson from "./InputAddPerson.jsx";
 import SearchbyEmail from "./SearchbyEmail.jsx";
@@ -6,13 +6,27 @@ import SearchbyEmail from "./SearchbyEmail.jsx";
 const Table = () => {
   const [search, setSearch] = useState("");
   const [edit, setEdit] = useState(false);
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [statusFilter, setStatusFilter] = useState("");
+
+  const handleSortByName = () => {
+    const sorted = [...data].sort((a, b) => {
+      return sortOrder === "asc"
+        ? a.name.localeCompare(b.name)
+        : b.name.localeCompare(a.name);
+    });
+    setData(sorted);
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+  };
 
   const handleChange = (event) => {
     console.log("searching...");
     setSearch(event.target.value);
   };
 
-  const [data, setData] = useState([
+  const [data, setData] = useState([]);
+
+  const initialData = [
     {
       id: 1,
       name: "Anna",
@@ -34,8 +48,10 @@ const Table = () => {
       email: "vasothom@hotmail.com",
       status: "Blocked",
     },
-  ]);
-
+  ];
+  useEffect(() => {
+    setData(initialData);
+  }, []);
   const addPerson = (newPerson) => {
     const highestId = Math.max(...data.map((person) => person.id));
     const nextId = highestId + 1;
@@ -46,6 +62,9 @@ const Table = () => {
   const filterdata = data.filter((el) =>
     el.email.toLowerCase().includes(search.toLowerCase())
   );
+  const filteredData = filterdata.filter(
+    (val) => statusFilter === "" || val.status === statusFilter
+  );
 
   const deleteOne = (id) => {
     setData(data.filter((el) => el.id !== id));
@@ -53,6 +72,10 @@ const Table = () => {
 
   const updateOne = (id) => {
     setEdit(id);
+  };
+
+  const handleStatusFilter = (event) => {
+    setStatusFilter(event.target.value);
   };
 
   return (
@@ -64,16 +87,30 @@ const Table = () => {
         <thead>
           <tr>
             <th>id</th>
-            <th>Name</th>
+            <th onClick={handleSortByName}>
+              Name {sortOrder === "asc" ? " 🔽" : " 🔼"}
+            </th>
             <th>Birthday</th>
             <th>Email</th>
-            <th>Status</th>
+            <th>
+              Status
+              <select
+                name="statusFilter"
+                value={statusFilter}
+                onChange={handleStatusFilter}
+              >
+                <option value="">All</option>
+                <option value="Active">Active</option>
+                <option value="Pending">Pending</option>
+                <option value="Blocked">Blocked</option>
+              </select>
+            </th>
           </tr>
         </thead>
 
-        {filterdata.length > 0 ? (
+        {filteredData.length > 0 ? (
           <tbody key="data">
-            {filterdata.map((val) =>
+            {filteredData.map((val) =>
               edit === val.id ? (
                 <EditPerson
                   key={val.id}
