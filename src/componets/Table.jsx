@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import EditPerson from "./EditPerson.jsx";
 import InputAddPerson from "./InputAddPerson.jsx";
 import SearchbyEmail from "./SearchbyEmail.jsx";
+import "./Table.css";
 
 const Table = () => {
   const [search, setSearch] = useState("");
@@ -38,7 +39,7 @@ const Table = () => {
       id: 2,
       name: "Ella",
       birthday: "10.01.2020",
-      email: "ellarotary@hotmail.com",
+      email: "panos@hotmail.com",
       status: "Pending",
     },
     {
@@ -99,7 +100,7 @@ const Table = () => {
                 value={statusFilter}
                 onChange={handleStatusFilter}
               >
-                <option value="">All</option>
+                <option value="all">All</option>
                 <option value="Active">Active</option>
                 <option value="Pending">Pending</option>
                 <option value="Blocked">Blocked</option>
@@ -126,10 +127,17 @@ const Table = () => {
                   <td>{val.email}</td>
                   <td>{val.status}</td>
                   <td>
-                    <button onClick={() => updateOne(val.id)}>Edit</button>
+                    <button onClick={() => updateOne(val.id)} className="edit">
+                      Edit
+                    </button>
                   </td>
                   <td>
-                    <button onClick={() => deleteOne(val.id)}>Remove</button>
+                    <button
+                      onClick={() => deleteOne(val.id)}
+                      className="remove"
+                    >
+                      Remove
+                    </button>
                   </td>
                 </tr>
               )

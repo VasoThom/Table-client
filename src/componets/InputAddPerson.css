@@ -1,0 +1,35 @@
+/* Style for the form container */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+/* Style for the input fields */
+input[type="text"],
+input[type="date"],
+input[type="email"],
+select {
+  flex: 1; /* Allow input fields to grow to take available space */
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  box-shadow: none;
+}
+
+/* Style for the "Add" button */
+button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}

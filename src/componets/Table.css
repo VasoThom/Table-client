@@ -1,0 +1,89 @@
+div {
+  margin: 20px;
+  font-family: Arial, sans-serif;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+th {
+  background-color: #f2f2f2;
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/*  "Edit" */
+.edit {
+  background-color: #4caf50;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+.edit:hover {
+  background-color: rgb(32, 113, 32);
+
+  color: #ddd;
+}
+
+/* "Remove" */
+.remove {
+  background-color: red;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+.remove:hover {
+  background-color: rgb(123, 19, 10);
+
+  color: #ddd;
+}
+/* Style for the search input */
+input[type="text"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+/* Style for the status filter select */
+select[name="statusFilter"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+/*  "not found" message */
+td[colspan="4"] {
+  font-style: italic;
+  text-align: center;
+  color: #ff0000;
+}
+
+/* Style for the "Active" option in the status filter select */
+select[name="statusFilter"] option[value="Active"] {
+  background-color: green;
+  color: white;
+}
+select[name="statusFilter"] option[value="Pending"] {
+  background-color: orange;
+  color: white;
+}
+select[name="statusFilter"] option[value="Blocked"] {
+  background-color: red;
+  color: white;
+}
+select[name="statusFilter"] option[value="all"] {
+  background-color: blue;
+  color: white;
+}

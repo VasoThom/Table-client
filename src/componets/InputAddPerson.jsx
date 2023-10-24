@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./InputAddPerson.css";
 
 const InputAddPerson = ({ addPerson, setEdit, edit }) => {
   const initial = {
@@ -30,6 +31,7 @@ const InputAddPerson = ({ addPerson, setEdit, edit }) => {
         onChange={onChange}
         placeholder="name"
         name="name"
+        required
       />
 
       <input
@@ -37,6 +39,7 @@ const InputAddPerson = ({ addPerson, setEdit, edit }) => {
         value={values.birthday}
         onChange={onChange}
         name="birthday"
+        required
       />
       <input
         type="email"
@@ -44,8 +47,9 @@ const InputAddPerson = ({ addPerson, setEdit, edit }) => {
         value={values.email}
         placeholder="email"
         name="email"
+        required
       />
-      <select name="status" onChange={onChange} value={values.status}>
+      <select name="status" onChange={onChange} value={values.status} required>
         <option value="">Status</option>
         <option value="Active">Active</option>
         <option value="Pending">Pending</option>

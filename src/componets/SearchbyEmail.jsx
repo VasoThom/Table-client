@@ -1,4 +1,5 @@
 import React from "react";
+import "./SearchByEmail.css";
 
 const SearchbyEmail = ({ handleChange }) => {
   return (
