@@ -37,7 +37,7 @@ const Table = () => {
     },
     {
       id: 2,
-      name: "Ella",
+      name: "Panos",
       birthday: "10.01.2020",
       email: "panos@hotmail.com",
       status: "Pending",
